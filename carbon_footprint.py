@@ -306,7 +306,17 @@ def findCO2FootPrint(email,answer_1,answer_2,answer_3,answer_4,answer_5,answer_6
         'Actions Required to reduce CO2 Emission':""
         }
 
-    
+    labels = ['electricity', 'flights', 'transportation', 'food', 'retail']
+    population_means = [7252.76, 602.45, 4515.27, 2267.96, 22.41]
+
+    if footprintbytype[3] > population_means[3]:
+        processedDataWithActions['Actions Required to reduce CO2 Emission'] += "* Try eating organic foods which are low in carbon \n"
+    if footprintbytype[2] > population_means[2]:
+        processedDataWithActions['Actions Required to reduce CO2 Emission'] += "* Practice eco driving"
+    if footprintbytype[1] > population_means[1]:
+        processedDataWithActions['Actions Required to reduce CO2 Emission'] += "* Reduce air travel"
+    if footprintbytype[0] > population_means[0]:
+        processedDataWithActions['Actions Required to reduce CO2 Emission'] += "* Switch to CFLs, Try using high efficient cooling/heating system(HVACs)"
 
     print(data)
     curdir=os.getcwd()
