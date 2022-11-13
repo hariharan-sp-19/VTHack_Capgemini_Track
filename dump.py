@@ -1,29 +1,11 @@
-import requests, time, random, webbrowser, datetime, platform, sys, pygame, shutil
-import ftplib, getpass, os, json, pyaudio, wave, smtplib, random, socket,csv
-import speech_recognition as sr_audio
-from bs4 import BeautifulSoup
-import pyttsx3 as pyttsx
-import os, re, matplotlib
-from reportlab.pdfgen import canvas
-from reportlab.lib import utils
-from reportlab.lib.pagesizes import letter
-from reportlab.lib.pagesizes import landscape, portrait
-from reportlab.platypus import Image
+import shutil, os
+import random, csv
+import os, matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 from matplotlib.patches import Shadow
-import numpy as np
-from textblob import TextBlob
-from PyPDF2 import PdfFileMerger, PdfFileReader
-import numpy as np 
 from os.path import basename
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email.mime.text import MIMEText
-from email.mime.application import MIMEApplication
-from email.utils import COMMASPACE, formatdate
-from email import encoders
-import pandas as pd 
+import numpy as np
 
 ##############################################################################
 ##                            HELPER FUNCTIONS                              ##
