@@ -24,18 +24,13 @@ slack_event_adapter = SlackEventAdapter(os.environ['SIGNIN_TOKEN'],'/slack/event
 
 client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
 
-# client.chat_postMessage(channel='#test', text="Hello World")
+# client.chat_postMessage(channel='#co2_free', text="Hello World")
 BOT_ID = client.api_call("auth.test")["user_id"]
-
-SCHEDULED_MESSAGES = [
-    {'text': 'ScheduleTest', 'post_at': (
-        datetime.now() + timedelta(seconds=20)).timestamp(), 'channel': 'C04ANQ48DDH'},
-]
 
 
 
 client.chat_postMessage(
-    channel='#test',
+    channel='#co2_free',
     blocks=[
         {
 
@@ -180,8 +175,72 @@ def survey():
         response = findCO2FootPrint(user,response["household_count"],response["electricity_bill"],response["flightPerYear"],response["own_car"],response["average_commute_to_work"],response["public_transport_usage"],isrideShareAppUser,response["total_rides_per_month"],response["isVeg"],response["meatConsumtion"],response["amazonSpending"],False,False)
         print(response)
         client.chat_postMessage(
-            channel="#test",
-            text=response,
+            channel="#co2_free",
+            blocks=[
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": user+ " here is your Co2 Footprint summary"
+                    },
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Electricity Co2 emission "+str(response['electric (kg Co2/year)']) +"(kg Co2/year)"
+                    },
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Electricity Co2 emission "+str(response['electric (kg Co2/year)']) +"(kg Co2/year)"
+                    }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Air Travel Co2 emission "+str(response['flight (kg Co2/year)']) +"(kg Co2/year)"
+                    }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Road Travel Co2 emission "+str(response['transportation (kg Co2/year)']) +"(kg Co2/year)"
+                    }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Food Co2 emission "+str(response['food (kg Co2/year)']) +"(kg Co2/year)"
+                    }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Retail Co2 emission "+str(response['retail (kg Co2/year)']) +"(kg Co2/year)"
+                    }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Summary : Your total Co2 footprint is "+str(response['Total Co2 Footprint'])+" (kg Co2/year) and "+response['Conclusion']
+                    }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Actions to be taken to reduce Co2 emission : "+response['Actions Required to reduce CO2 Emission']
+                    }
+                }
+            ]
         )
 
     response = make_response("",200)

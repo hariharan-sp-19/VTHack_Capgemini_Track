@@ -310,13 +310,17 @@ def findCO2FootPrint(email,answer_1,answer_2,answer_3,answer_4,answer_5,answer_6
     population_means = [7252.76, 602.45, 4515.27, 2267.96, 22.41]
 
     if footprintbytype[3] > population_means[3]:
-        processedDataWithActions['Actions Required to reduce CO2 Emission'] += "* Try eating organic foods which are low in carbon \n"
+        processedDataWithActions['Conclusion'] +=" Your food co2 emission is "+ str(round(footprintbytype[3] / population_means[3],2))+"x greater than the population average | "
+        processedDataWithActions['Actions Required to reduce CO2 Emission'] += "* Try eating organic foods which are low in carbon "
     if footprintbytype[2] > population_means[2]:
         processedDataWithActions['Actions Required to reduce CO2 Emission'] += "* Practice eco driving"
+        processedDataWithActions['Conclusion'] +=" Your transportation co2 emission is "+ str(round(footprintbytype[2] / population_means[2],2))+"x greater than the population average | "
     if footprintbytype[1] > population_means[1]:
         processedDataWithActions['Actions Required to reduce CO2 Emission'] += "* Reduce air travel"
+        processedDataWithActions['Conclusion'] +=" Your flight co2 emission is "+ str(round(footprintbytype[1] / population_means[1],2))+"x greater than the population average | "
     if footprintbytype[0] > population_means[0]:
         processedDataWithActions['Actions Required to reduce CO2 Emission'] += "* Switch to CFLs, Try using high efficient cooling/heating system(HVACs)"
+        processedDataWithActions['Conclusion'] +=" Your electricity co2 emission is "+ str(round(footprintbytype[0] / population_means[0],2))+"x greater than the population average | "
 
     print(data)
     curdir=os.getcwd()
